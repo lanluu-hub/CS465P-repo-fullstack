@@ -36,7 +36,7 @@ const fizzBuzz = function returnStringArrayAnswer(n) {
     } else if (i % 5 === 0) {
       answer.push('Buzz');
     } else {
-      answer.push(i);
+      answer.push(String(i));
     }
   }
   return answer;

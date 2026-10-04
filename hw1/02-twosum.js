@@ -22,14 +22,14 @@ Input: nums = [3,3], target = 6
 Output: [0,1]
 
 **/
-const twosum = (nums, target) => {
+const twoSum = function returnIndicesThatAddToTarget(nums, target) {
   const hashmap = new Map();
 
   for (let i = 0; i < nums.length; i++) {
     let diff = target - nums[i];
 
     if (hashmap.has(diff)) {
-      console.log("[", hashmap.get(diff), ",", i, "]");
+      console.log('[', hashmap.get(diff), ',', i, ']');
     }
 
     hashmap.set(nums[i], i);
@@ -39,15 +39,15 @@ const twosum = (nums, target) => {
 const main = () => {
   const nums = [2, 7, 11, 15];
   const target = 9;
-  twosum(nums, target);
+  twoSum(nums, target);
 
   const nums2 = [3, 2, 4];
   const target2 = 6;
-  twosum(nums2, target2);
+  twoSum(nums2, target2);
 
   const nums3 = [3, 3];
   const target3 = 6;
-  twosum(nums3, target3);
+  twoSum(nums3, target3);
 };
 
 main();
