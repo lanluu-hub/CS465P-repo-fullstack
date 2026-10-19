@@ -1,6 +1,74 @@
 /** Exercise 01 - Coins **/
 
-// Add your function here 
+// Add your function here
+const calculateChange = (amount) => {
+  if (typeof amount !== 'number' || Number.isNaN(amount) || amount < 0) {
+    return 'Error: amount must be valid number';
+  }
+
+  if (amount > 100.0) {
+    return 'Error: the number is too large';
+  }
+
+  if (amount === 0) {
+    return 'Amount is $0';
+  }
+
+  let cents = Math.round(amount * 100);
+
+  const coins = new Map();
+  const result = [];
+  let dollars = 0;
+  let quarters = 0;
+  let dimes = 0;
+  let nickels = 0;
+  let pennies = 0;
+
+  while (cents > 0) {
+    if (cents >= 100) {
+      dollars += 1;
+      cents -= 100;
+    } else if (cents >= 25) {
+      quarters += 1;
+      cents -= 25;
+    } else if (cents >= 10) {
+      dimes += 1;
+      cents -= 10;
+    } else if (cents >= 5) {
+      nickels += 1;
+      cents -= 5;
+    } else if (cents >= 1) {
+      pennies += 1;
+      cents -= 1;
+    }
+  }
+
+  if (dollars > 0) {
+    coins.set('dollar', dollars);
+  }
+
+  if (quarters > 0) {
+    coins.set('quarter', quarters);
+  }
+
+  if (dimes > 0) {
+    coins.set('dime', dimes);
+  }
+
+  if (nickels > 0) {
+    coins.set('nickel', nickels);
+  }
+
+  if (pennies > 0) {
+    coins.set('penny', pennies);
+  }
+
+  coins.forEach((val, key) => {
+    result.push(`${val} ${key}`);
+  });
+
+  return result.join(', ');
+};
 
 // Sample test cases
 console.log(calculateChange(4.62));
@@ -10,4 +78,11 @@ console.log(calculateChange(0.16));
 console.log(calculateChange(150.11));
 // $150.11 ==> Error: the number is too large
 
-// Add additional test cases here 
+// Add additional test cases here
+console.log('========= Edge Case ============');
+console.log(calculateChange(100));
+console.log(calculateChange(0.99));
+console.log(calculateChange(0));
+console.log(calculateChange(100.0001));
+console.log(calculateChange(-1));
+console.log(calculateChange('abc'));
