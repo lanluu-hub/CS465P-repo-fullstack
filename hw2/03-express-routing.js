@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 5001;
+const port = process.env.PORT || 5002;
 
 // http://localhost:5001/welcome should return a status code 200 with a welcome message of your choice in html format
 
@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
 // Add your code here
 app.get(`/${routes[0]}`, (req, res) => {
   res.status(200);
-  res.set({ 'Content-Type': 'text/html' });
+  res.type('text/html');
   res.send('Custom Welcome message');
 });
 
@@ -40,7 +40,7 @@ app.get(`/${routes[1]}`, (req, res) => {
 
 app.get(`/${routes[2]}`, (req, res) => {
   res.status(200);
-  res.set({ 'Content-Type': 'text/html' });
+  res.type('text/html');
   res.send('This is a redirected page');
 });
 
@@ -51,14 +51,14 @@ app.get(`/${routes[3]}`, (req, res) => {
 });
 
 app.get(`/${routes[4]}`, (req, res) => {
-  res.set({ 'Set-cookie': 'hello=world' });
+  res.cookie('hello', 'world');
   res.type('text/plain');
   res.send('cookies... yummm');
 });
 
 app.use((req, res) => {
   res.status(404);
-  res.set({ 'Content-type': 'text/html' });
+  res.type('text/html');
   res.send('404 - page not found');
 });
 
