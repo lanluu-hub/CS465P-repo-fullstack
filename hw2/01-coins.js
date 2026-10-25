@@ -3,15 +3,15 @@
 // Add your function here
 const calculateChange = (amount) => {
   if (typeof amount !== 'number' || Number.isNaN(amount) || amount < 0) {
-    return 'Error: amount must be valid number';
+    return `$${amount} ===> Error: amount must be valid number`;
   }
 
   if (amount > 100.0) {
-    return 'Error: the number is too large';
+    return `$${amount} ===> Error: the number is too large`;
   }
 
   if (amount === 0) {
-    return 'Amount is $0';
+    return `$${amount} ===> $0 penny`;
   }
 
   let cents = Math.round(amount * 100);
@@ -44,30 +44,30 @@ const calculateChange = (amount) => {
   }
 
   if (dollars > 0) {
-    coins.set('dollar', dollars);
+    coins.set(dollars === 1 ? 'dollar' : 'dollars', dollars);
   }
 
   if (quarters > 0) {
-    coins.set('quarter', quarters);
+    coins.set(quarters === 1 ? 'quarter' : 'quarters', quarters);
   }
 
   if (dimes > 0) {
-    coins.set('dime', dimes);
+    coins.set(dimes === 1 ? 'dime' : 'dimes', dimes);
   }
 
   if (nickels > 0) {
-    coins.set('nickel', nickels);
+    coins.set(nickels === 1 ? 'nickel' : 'nickels', nickels);
   }
 
   if (pennies > 0) {
-    coins.set('penny', pennies);
+    coins.set(pennies === 1 ? 'penny' : 'pennies', pennies);
   }
 
   coins.forEach((val, key) => {
     result.push(`${val} ${key}`);
   });
 
-  return result.join(', ');
+  return `$${amount} ===> ${result.join(', ')}`;
 };
 
 // Sample test cases
