@@ -21,9 +21,38 @@ const server = http.createServer((req, res) => {
     'other',
   ];
 
-  res.writeHead(200, { 'Content-Type': 'text/html' });
-  res.write('Node Routing Exercise');
-  res.end();
+  const { url, method } = req;
+
+  if (url === '/' && method === 'GET') {
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.write('Node Routing Exercise');
+    res.end();
+  } else if (url === `/${routes[0]}` && method === 'GET') {
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.write('Welcome to CS465P - HW02');
+    res.end();
+  } else if (url === `/${routes[1]}` && method === 'GET') {
+    res.writeHead(302, { location: `/${routes[2]}` });
+    res.end();
+  } else if (url === `/${routes[2]}` && method === 'GET') {
+    res.writeHead(200, { 'content-type': 'text/html' });
+    res.write('This is redirected Page');
+    res.end();
+  } else if (url === `/${routes[3]}` && method === 'GET') {
+    res.setHeader('Cache-Control', 'public, max-age=86400');
+    res.writeHead(200, { 'content-type': 'text/html' });
+    res.write('this resource was cached');
+    res.end();
+  } else if (url === `/${routes[4]}` && method === 'GET') {
+    res.setHeader('Set-Cookie', 'hello=world');
+    res.writeHead(200, { 'content-type': 'text/plain' });
+    res.write('cookies...yummm');
+    res.end();
+  } else {
+    res.writeHead(404, { 'Content-Type': 'text/html' });
+    res.write('404 - page not found');
+    res.end();
+  }
 });
 
 server.listen(port, () => {
