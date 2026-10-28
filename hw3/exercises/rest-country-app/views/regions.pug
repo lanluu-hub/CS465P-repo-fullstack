@@ -1,0 +1,16 @@
+extends layout
+
+block content
+    h1 Countries by Region
+
+    .regions-grid
+        each region in regions
+            .region-card
+                h2= region.region
+                p
+                    strong Number of Countries:
+                    |  #{region.count}
+
+                ul.country-list
+                    each country in region.countries
+                        li= country
