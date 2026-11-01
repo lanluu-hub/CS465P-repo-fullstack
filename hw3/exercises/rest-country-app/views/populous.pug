@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1 Most populous countries
+  p #{countries.length} countries with 50 million people or more
+  .cards
+    each country in countries
+      .card
+        if country.flag
+          img(src=country.flag, alt='Flag of ' + country.name)
+        h2= country.name
+        p= country.population.toLocaleString()
