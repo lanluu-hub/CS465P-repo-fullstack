@@ -8,10 +8,12 @@ block content
       tr
         th Country
         th Capital
-        th Leader
+        th Currency Name 
+        th Currency Symbol
     tbody
       each country in countries
         tr
           td= country.name
           td= country.capital
-          td= country.leader
+          td= country.currencyName
+          td= country.currencySymbol

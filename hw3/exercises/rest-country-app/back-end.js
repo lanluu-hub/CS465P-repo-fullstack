@@ -24,7 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 const BASE_URL = 'https://api.restcountries.com/countries/v5';
 
 const FIELDS =
-  'names.common,capitals,region,population,flag.url_png,flag.url_svg,classification,uuid';
+  'names.common,capitals,currencies,region,population,flag.url_png,flag.url_svg,classification,uuid';
 
 /**
  * Fetches one page (up to 100 records) from the REST Countries API.
@@ -85,7 +85,14 @@ const countryShape = (cache) => {
         c.capitals.length === 0
           ? 'N/A'
           : c.capitals.map((capital) => capital.name).join(', ') || 'N/A',
-      leader: 'N/A',
+      currencyName:
+        c.currencies.length === 0
+          ? 'N/A'
+          : c.currencies.map((currency) => currency.name).join(', ') || 'N/A',
+      currencySymbol:
+        c.currencies.length === 0
+          ? 'N/A'
+          : c.currencies.map((currency) => currency.symbol).join(', ') || 'N/A',
     }));
 
   return reshapedCountry;
