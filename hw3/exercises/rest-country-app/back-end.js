@@ -56,14 +56,16 @@ async function loadAllCountries() {
   while (more) {
     const page = await fetchPage(offset);
 
-    results.push(...page.data.objects);
+    const pageData = page.data;
 
-    offset += page.data.meta.count;
-    more = page.data.meta.more;
-    lastMeta = page.data.meta;
+    results.push(...pageData.objects);
+
+    offset += pageData.meta.count;
+    more = pageData.meta.more;
+    lastMeta = pageData.meta;
 
     // inf-loop guard
-    if (page.data.meta.count === 0 && page.data.meta.more) {
+    if (pageData.meta.count === 0 && pageData.meta.more) {
       throw new Error('Offset never advances, inf loop');
     }
   }
@@ -114,16 +116,16 @@ const populousShape = (cache) => {
 const regionShape = (cache) => {
   const regionMap = new Map();
 
-  for (const c of cache) {
-    const region = c.region || 'Unknown';
-    const name = c.names.common;
+  cache.forEach((country) => {
+    const region = country.region || 'Unknown';
+    const name = country.names.common;
 
     if (!regionMap.has(region)) {
       regionMap.set(region, []);
     }
 
     regionMap.get(region).push(name);
-  }
+  });
 
   const regionArray = Array.from(regionMap.entries());
 
