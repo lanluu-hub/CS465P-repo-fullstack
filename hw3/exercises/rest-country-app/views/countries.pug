@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1 Countries
+  p Total: #{countries.length} countries
+  table
+    thead
+      tr
+        th Country
+        th Capital
+        th Currency Name 
+        th Currency Symbol
+    tbody
+      each country in countries
+        tr
+          td= country.name
+          td= country.capital
+          td= country.currencyName
+          td= country.currencySymbol
